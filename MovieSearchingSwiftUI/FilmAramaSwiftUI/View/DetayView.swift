@@ -19,8 +19,14 @@ struct DetayView: View {
             
             HStack {
                 Spacer()
-                OzelImage(url : filmDetayViewModel.filmDetayi?.poster ?? "")
-                    .frame(width : UIScreen.main.bounds.width * 0.6,height:UIScreen.main.bounds.height * 0.3,alignment: .center)
+                if let posterUrl = filmDetayViewModel.filmDetayi?.poster, !posterUrl.isEmpty {
+                    OzelImage(url: posterUrl)
+                        .frame(width : UIScreen.main.bounds.width * 0.6,height:UIScreen.main.bounds.height * 0.3,alignment: .center)
+                } else {
+                    Image("placeholder")
+                        .resizable()
+                        .frame(width : UIScreen.main.bounds.width * 0.6,height:UIScreen.main.bounds.height * 0.3,alignment: .center)
+                }
                 Spacer()
 
             }
