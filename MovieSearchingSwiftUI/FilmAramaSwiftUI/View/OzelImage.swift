@@ -12,19 +12,19 @@ struct OzelImage: View {
     let url : String
     @ObservedObject var imageDownloaderClient = ImageDownloaderClient()
     
-    
-    
     var body: some View {
-        
-        if let data = self.imageDownloaderClient.indirilenGorsel{
-            return Image(uiImage: UIImage(data: data)!)
-                .resizable()
-        }else{
-            return Image("placeholder")
-                .resizable()
+        Group {
+            if let data = self.imageDownloaderClient.indirilenGorsel {
+                Image(uiImage: UIImage(data: data)!)
+                    .resizable()
+            } else {
+                Image("placeholder")
+                    .resizable()
+            }
         }
-    
-
+        .onAppear {
+            self.imageDownloaderClient.gorselIndir(url: url)
+        }
     }
 }
 
